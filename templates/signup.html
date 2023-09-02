@@ -1,0 +1,16 @@
+{% extends "loginbase.html" %}
+{% block title%} demo {% endblock %}
+{% block content%}
+<form align="center" action="" method="POST">
+    <body style="background-color:white;"></body>
+    {{ form.hidden_tag() }}
+    <p>{{ form.username }}</p>
+    {{ form.password }}<br>
+    <br>
+    {{ form.submit }}
+</form>
+<form align="center">
+    <a href="/login">Login</a>
+</form>
+
+{% endblock %}

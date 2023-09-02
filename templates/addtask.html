@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title%} demo {% endblock %}
+{% block content%}
+
+{% with messages =get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages%}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{msg}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor%}
+    {% endif%}
+{% endwith %} 
+
+
+
+<div class="pos-f-t">
+    <div class="collapse" id="navbarToggleExternalContent">
+      <div class="bg-dark p-4">
+        <h4 class="text-white"></h4>
+        <span class="text-muted"><a class="btn btn-dark" href="/logout">Log Out</a></span>
+      </div>
+    </div>
+    <nav class="navbar navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <h4 class="text-white">TO-DO</h4>
+    </nav>
+  </div>
+
+
+<br>
+<form align="center" action="#" method="POST">
+    <body style="background-color:white;"></body>
+    <p><input type="text" placeholder="Add a new task" style="width: 900px;" name="nm"/>  <button class="btn btn-dark" style="font-size: 15px;"/><i class="bi bi-plus-lg"></i></button></p>
+</form>
+<table  class="table">
+    <tr align="center">
+        {% for header in headings %}
+        <th>{{ header }}</th>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for row in value %}
+        <tr align="center">
+            {% if row.user_id==iden %}
+                <td>{{ row.todo }}</td> 
+                <form action="/update/{{row.id}}" method="POST">
+                    <td><input type="text" style="width: 400px;" name="up"/>       <button class="btn btn-dark"/><i class="bi bi-pencil"></i></button></td>
+                </form>
+                <td><a class="btn btn-dark" href="/delete/{{row.id}}"><i class="bi bi-x-lg"></i></a></td>
+            {% endif %}
+        </tr>
+        {% endfor%}
+    </tr>
+</table>
+{% endblock %}
